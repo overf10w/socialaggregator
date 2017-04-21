@@ -12,15 +12,17 @@ var users = require('./routes/users');
 
 var app = express();
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var keys = require('./keyManager');
 
 passport.use(new GoogleStrategy({
-  clientId: '',
-  clientSecret: '',
-  callbackUrl: '',
-  function(req, accessToken, refreshToken, profile, done) {
+  clientID: keys.GoogleCredentials.clientID,
+  clientSecret: keys.GoogleCredentials.clientSecret,
+  callbackUrl: keys.GoogleCredentials.callbackUrl
+},
+  function (req, accessToken, refreshToken, profile, done) {
     done(null, profile);
   }
-}));
+));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -58,3 +58,6 @@ typings/
 .env
 
 .jshintrc
+
+# API keys:
+keyManager.js
