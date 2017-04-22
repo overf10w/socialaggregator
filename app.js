@@ -18,7 +18,7 @@ var keys = require('./keyManager');
 passport.use(new GoogleStrategy({
   clientID: keys.GoogleCredentials.clientID,
   clientSecret: keys.GoogleCredentials.clientSecret,
-  callbackUrl: keys.GoogleCredentials.callbackUrl
+  callbackURL: keys.GoogleCredentials.callbackURL
 },
   function (req, accessToken, refreshToken, profile, done) {
     done(null, profile);

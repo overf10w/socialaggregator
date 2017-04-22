@@ -61,3 +61,6 @@ typings/
 
 # API keys:
 keyManager.js
+
+# public/lib
+public/lib
