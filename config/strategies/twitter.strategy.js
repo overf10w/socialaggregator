@@ -11,13 +11,27 @@ module.exports = function() {
   },
   function(req, token, tokenSecret, profile, done) {
     var user = {};
-    user.image = profile._json.profile_image_url;
-    user.displayName = profile.displayName;
+    var query = {
+      'twitter.id': profile.id
+    };
+    User.findOne(query, function (err, user) {
+      if (user) {
+        console.log('found');
+        done(null, user);
+      } else {
+        console.log('not found!');
+        var user = new User();
+        // user.email = profile.emails[0].value;
+        user.image = profile._json.profile_image_url; 
+        user.displayName = profile.displayName;
 
-    user.twitter = {};
-    user.twitter.id = profile.id;
-    user.twitter.token = profile.accessToken;
+        user.twitter = {};
+        user.twitter.id = profile.id;
+        user.twitter.token = profile.accessToken;
 
-    done(null, user);
+        user.save();
+        done(null, user);
+      }
+    });
   }));
 };
